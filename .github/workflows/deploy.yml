@@ -16,30 +16,44 @@ jobs:
     steps:
       - name: Checkout church-connect
         uses: actions/checkout@v3
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
+      
       - name: Install dependencies
         run: npm ci
+      
       - name: Build
         run: npm run build
-      - name: Clone joshmacaraig.github.io
-        uses: actions/checkout@v3
+      
+      # Deploy to church-connect's gh-pages branch first
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          repository: joshmacaraig/joshmacaraig.github.io
-          ref: gh-pages
-          path: main-site
-          token: ${{ secrets.ACCESS_TOKEN }}
-      - name: Create church-connect directory
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true
+      
+      # Next, we'll manually create a separate repo for the main site integration
+      - name: Clone main site repository
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git clone https://oauth2:${{ secrets.ACCESS_TOKEN }}@github.com/joshmacaraig/joshmacaraig.github.io.git main-site
+          cd main-site
+          git checkout gh-pages || git checkout -b gh-pages
+      
+      - name: Copy church-connect files to main site
         run: |
           mkdir -p main-site/church-connect
           cp -r dist/* main-site/church-connect/
-      - name: Deploy to joshmacaraig.github.io
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          repository: joshmacaraig/joshmacaraig.github.io
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          publish_dir: ./main-site
-          publish_branch: gh-pages
+      
+      - name: Commit and push to main site
+        run: |
+          cd main-site
+          git add .
+          git commit -m "Update church-connect subdirectory" || echo "No changes to commit"
+          git push -f https://oauth2:${{ secrets.ACCESS_TOKEN }}@github.com/joshmacaraig/joshmacaraig.github.io.git gh-pages

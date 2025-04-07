@@ -1,0 +1,12 @@
+{
+  "name": "church-connect-supabase",
+  "version": "1.0.0",
+  "description": "Supabase setup scripts for Church Connect",
+  "type": "module",
+  "scripts": {
+    "setup": "node run-setup.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

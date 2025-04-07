@@ -2,10 +2,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Use relative paths instead of absolute
+  base: '/church-connect/', // Set the base path explicitly to the subdirectory
   build: {
     outDir: 'dist',
     emptyOutDir: true,

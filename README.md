@@ -68,7 +68,7 @@ For detailed setup and development information, see:
 
 ## Deployment
 
-The application is deployed on GitHub Pages at: [https://joshmacaraig.github.io/church-connect/](https://joshmacaraig.github.io/church-connect/)
+The application is deployed at: [https://joshmacaraig.com/church-connect/](https://joshmacaraig.com/church-connect/)
 
 ### Deploying to GitHub Pages
 

@@ -2,6 +2,10 @@
 
 A social media app for Christians with worship team and calendar management features. This mobile-first application serves as a platform for church communities to organize worship services, plan events, and share prayer requests.
 
+## Status
+
+Currently deploying with GitHub Pages.
+
 ## Main Features
 
 - **Authentication**: User registration, login, and profile management

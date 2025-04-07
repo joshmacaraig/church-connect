@@ -66,6 +66,20 @@ For detailed setup and development information, see:
 - [Supabase Setup Guide](./docs/SUPABASE_SETUP.md)
 - [Claude Project Setup](./docs/CLAUDE_PROJECT_SETUP.md)
 
+## Deployment
+
+The application is deployed on GitHub Pages at: [https://joshmacaraig.github.io/church-connect/](https://joshmacaraig.github.io/church-connect/)
+
+### Deploying to GitHub Pages
+
+To deploy the application to GitHub Pages, run:
+
+```bash
+npm run deploy
+```
+
+Alternatively, pushing to the main branch will trigger an automatic deployment via GitHub Actions.
+
 ## Development Roadmap
 
 1. **Phase 1**: Project Setup & Authentication

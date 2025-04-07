@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "setup-supabase": "node supabase/run-setup.js",
     "generate-sql": "node supabase/generate-sql.js",
-    "build-css": "tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/output.css"
+    "build-css": "tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/output.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
@@ -31,6 +33,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "vite": "^5.0.0"

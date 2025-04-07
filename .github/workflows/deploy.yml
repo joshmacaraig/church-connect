@@ -14,7 +14,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout church-connect
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -25,9 +25,21 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Deploy
+      - name: Clone joshmacaraig.github.io
+        uses: actions/checkout@v3
+        with:
+          repository: joshmacaraig/joshmacaraig.github.io
+          ref: gh-pages
+          path: main-site
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Create church-connect directory
+        run: |
+          mkdir -p main-site/church-connect
+          cp -r dist/* main-site/church-connect/
+      - name: Deploy to joshmacaraig.github.io
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          cname: joshmacaraig.com
+          repository: joshmacaraig/joshmacaraig.github.io
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          publish_dir: ./main-site
+          publish_branch: gh-pages
